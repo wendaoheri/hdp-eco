@@ -1,0 +1,9 @@
+FROM centos:last
+
+USER root
+
+RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+RUN yum makecache
+
+RUN yum install sshd
