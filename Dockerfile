@@ -22,4 +22,4 @@ RUN tar -xvf jdk-8u191-linux-x64.tar.gz -C /opt && \
 
 ENV JAVA_HOME /opt/jdk
 ENV CLASSPATH .:${JAVA_HOME}/lib;${JAVA_HOME}/lib/tools.jar
-ENV PATH ${JAVA_HOME}/bin
+ENV PATH ${JAVA_HOME}/bin:$PATH
