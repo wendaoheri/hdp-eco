@@ -8,7 +8,9 @@ RUN yum install -y openssh openssh-server openssh-clients wget
 # config ssh 
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -P '' && \
     ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -P '' && \
-    ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -P ''
+    ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -P '' && \
+    ssh-keygen -t rsa -f ~/.ssh/id_rsa -P '' && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
     
 ADD config/other/ssh_config /root/.ssh/config
 RUN chmod 600 /root/.ssh/config && \
@@ -37,5 +39,7 @@ ENV HADOOP_CONF_DIR ${HADOOP_HOME}/etc/hadoop
 ENV PATH ${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${PATH}
 
 ADD config/startup.sh /
+
+RUN chmod +x startup.sh
 
 CMD [ "sh", "-c", "/startup.sh; bash"]
