@@ -1,4 +1,4 @@
-FROM centos:last
+FROM centos:latest
 
 USER root
 
