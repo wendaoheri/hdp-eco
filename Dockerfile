@@ -6,4 +6,4 @@ RUN curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Cen
 
 RUN yum makecache
 
-RUN yum install sshd
+RUN yum install -y openssh openssh-server openssh-clients
