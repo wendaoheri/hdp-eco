@@ -32,6 +32,9 @@ RUN mkdir -p /var/hadoop/dfs/name && \
    mkdir -p /var/hadoop/dfs/namesecondary && \
    $HADOOP_HOME/bin/hdfs namenode -format
 
+# ssh
+EXPOSE 22
+# haoop
 EXPOSE 50070 8088 9000
 
 CMD [ "sh", "-c", "/startup.sh; bash"]
