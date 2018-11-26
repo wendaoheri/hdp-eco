@@ -43,4 +43,7 @@ EXPOSE 22
 # haoop
 EXPOSE 50070 8088 9000
 
+# hive
+EXPOSE 9083 10000
+
 CMD [ "sh", "-c", "/startup.sh; bash"]

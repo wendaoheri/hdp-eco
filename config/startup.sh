@@ -4,3 +4,5 @@
 
 start-dfs.sh
 start-yarn.sh
+
+hive --service metastore &
