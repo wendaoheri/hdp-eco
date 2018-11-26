@@ -33,7 +33,7 @@ RUN mkdir -p /var/hadoop/dfs/name && \
    $HADOOP_HOME/bin/hdfs namenode -format
 
 # download mysql driver
-RUN wget https://search.maven.org/remotecontent\?filepath\=mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar > mysql-connector-java.jar
+RUN wget -O mysql-connector-java.jar https://search.maven.org/remotecontent\?filepath\=mysql/mysql-connector-java/8.0.13/mysql-connector-java-8.0.13.jar
 
 # link mysql driver to hive lib
 RUN ln -s /mysql-connector-java.jar ${HIVE_HOME}/lib/mysql-connector-java.jar
