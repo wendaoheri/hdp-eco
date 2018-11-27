@@ -19,13 +19,15 @@ ENV HBASE_HOME /opt/hbase
 ENV SPARK_HOME /opt/spark
 ENV KAFKA_HOME /opt/kafka
 ENV ZOOKEEPER_HOME /opt/zookeeper
-ENV PATH ${JAVA_HOME}/bin:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${SCALA_HOME}/bin:${HIVE_HOME}/bin:${HBASE_HOME}/bin:${KAFKA_HOME}/bin:${ZOOKEEPER_HOME}/bin:${M2_HOME}/bin:${PATH}
+ENV ALLUXIO_HOME /opt/alluxio
+ENV PATH ${JAVA_HOME}/bin:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${SCALA_HOME}/bin:${HIVE_HOME}/bin:${HBASE_HOME}/bin:${KAFKA_HOME}/bin:${ZOOKEEPER_HOME}/bin:${M2_HOME}/bin:${ALLUXIO_HOME}/bin:${PATH}
 
 ADD config/hadoop/* $HADOOP_HOME/etc/hadoop/
 ADD config/hive/* $HIVE_HOME/conf/
 ADD config/hbase/* ${HBASE_HOME}/conf/
-ADD config/spark/* ${SPARK_HOME}}/conf/
+ADD config/spark/* ${SPARK_HOME}/conf/
 ADD config/kafka/* ${KAFKA_HOME}/conf/
+ADD config/alluxio/* ${ALLUXIO_HOME}/conf/
 
 RUN mkdir -p /var/hadoop/dfs/name && \ 
    mkdir -p /var/hadoop/dfs/data && \
@@ -45,5 +47,11 @@ EXPOSE 50070 8088 9000
 
 # hive
 EXPOSE 9083 10000
+
+# JSTATD JMX
+EXPOSE 1099 1992
+
+# alluxio
+EXPOSE 19999 30000
 
 CMD [ "sh", "-c", "/startup.sh; bash"]

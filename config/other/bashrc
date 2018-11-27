@@ -102,4 +102,5 @@ export HBASE_HOME=/opt/hbase
 export SPARK_HOME=/opt/spark
 export KAFKA_HOME=/opt/kafka
 export ZOOKEEPER_HOME=/opt/zookeeper
-export PATH=${JAVA_HOME}/bin:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${SCALA_HOME}/bin:${HIVE_HOME}/bin:${HBASE_HOME}/bin:${KAFKA_HOME}/bin:${ZOOKEEPER_HOME}/bin:${M2_HOME}/bin:${PATH}
+export ALLUXIO_HOME=/opt/alluxio
+export PATH=${JAVA_HOME}/bin:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${SCALA_HOME}/bin:${HIVE_HOME}/bin:${HBASE_HOME}/bin:${KAFKA_HOME}/bin:${ZOOKEEPER_HOME}/bin:${M2_HOME}/bin:${ALLUXIO_HOME}/bin:${PATH}
