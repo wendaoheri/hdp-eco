@@ -40,6 +40,8 @@ RUN wget -O mysql-connector-java.jar https://search.maven.org/remotecontent\?fil
 # link mysql driver to hive lib
 RUN ln -s /mysql-connector-java.jar ${HIVE_HOME}/lib/mysql-connector-java.jar
 
+RUN alluxio format
+
 # ssh
 EXPOSE 22
 # haoop
