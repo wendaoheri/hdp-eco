@@ -48,14 +48,13 @@ RUN alluxio format
 EXPOSE 22
 # haoop
 EXPOSE 50070 8088 9000
-
 # hive
 EXPOSE 9083 10000
-
 # JSTATD JMX
 EXPOSE 1099 1992
-
 # alluxio
 EXPOSE 19999 30000
+# flink
+EXPOSE 8081
 
 CMD [ "sh", "-c", "/startup.sh; bash"]
