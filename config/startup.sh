@@ -2,13 +2,7 @@
 
 /usr/sbin/sshd
 
-start-dfs.sh
-start-yarn.sh
+mkdir -p /var/log/hadoop-hdfs
+mkdir -p /var/log/hadoop-yarn
 
-hdfs dfs -mkdir -p /user/hive/warehouse
-
-nohup hive --service metastore > /dev/null 2>&1 &
-
-nohup hiveserver2 > /dev/null 2>&1 &
-
-alluxio-start.sh all Mount
+supervisord -c supervisord.conf

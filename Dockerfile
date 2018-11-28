@@ -8,6 +8,9 @@ RUN chmod +x startup.sh
 
 ADD config/other/bashrc /etc/
 
+ADD config/other/supervisord.conf /
+ADD config/other/supervisor.d/* /
+
 ENV JAVA_HOME /opt/jdk
 ENV SCALA_HOME /opt/scala
 ENV M2_HOME /opt/maven
@@ -56,5 +59,7 @@ EXPOSE 1099 1992
 EXPOSE 19999 30000
 # flink
 EXPOSE 8081
+# supervisor
+EXPOSE 9001
 
 CMD [ "sh", "-c", "/startup.sh; bash"]
