@@ -9,7 +9,7 @@ RUN chmod +x startup.sh
 ADD config/other/bashrc /etc/
 
 ADD config/other/supervisord.conf /
-ADD config/other/supervisor.d /
+ADD config/other/supervisor.d/ /
 
 ENV JAVA_HOME /opt/jdk
 ENV SCALA_HOME /opt/scala
