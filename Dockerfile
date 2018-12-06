@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hdp-eco-base:latest
+FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hdp-eco-base:1.0
 
 USER root
 
