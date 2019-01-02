@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hdp-eco-base:1.0
+FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hdp-eco-base
 
 USER root
 
@@ -50,7 +50,9 @@ RUN ln -s /mysql-connector-java.jar ${HIVE_HOME}/lib/mysql-connector-java.jar
 RUN alluxio format
 
 # install dr.elephant
-# RUN git clone https://github.com/linkedin/dr-elephant.git 
+RUN git clone https://github.com/linkedin/dr-elephant.git && \
+   cd dr-elephant; npm install -g bower; cd web; bower install; cd .. && \
+   ./compile.sh ../compile.conf
 
 # ssh
 EXPOSE 22
