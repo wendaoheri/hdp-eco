@@ -51,7 +51,7 @@ RUN alluxio format
 
 # install dr.elephant
 RUN git clone https://github.com/linkedin/dr-elephant.git && \
-   cd dr-elephant; npm install -g bower; cd web; bower install; cd .. && \
+   cd dr-elephant; npm install -g bower; cd web; bower install --allow-root; cd .. && \
    ./compile.sh ../compile.conf
 
 # ssh
