@@ -34,6 +34,7 @@ ADD config/spark/* ${SPARK_HOME}/conf/
 ADD config/kafka/* ${KAFKA_HOME}/conf/
 ADD config/alluxio/* ${ALLUXIO_HOME}/conf/
 ADD config/flink/* ${FLINK_HOME}/conf/
+ADD config/dr-elephant/compile.conf /
 
 RUN mkdir -p /var/hadoop/dfs/name && \ 
    mkdir -p /var/hadoop/dfs/data && \
@@ -47,6 +48,12 @@ RUN wget -O mysql-connector-java.jar https://search.maven.org/remotecontent\?fil
 RUN ln -s /mysql-connector-java.jar ${HIVE_HOME}/lib/mysql-connector-java.jar
 
 RUN alluxio format
+
+# install dr.elephant
+RUN git clone https://github.com/linkedin/dr-elephant.git && \
+   cd dr-elephant && \
+   npm install -g bower ; cd web; bower install; cd .. && \
+   ./compile.sh ../compile.conf
 
 # ssh
 EXPOSE 22
