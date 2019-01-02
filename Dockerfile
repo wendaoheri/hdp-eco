@@ -50,7 +50,7 @@ RUN ln -s /mysql-connector-java.jar ${HIVE_HOME}/lib/mysql-connector-java.jar
 RUN alluxio format
 
 # install dr.elephant
-RUN git clone https://github.com/linkedin/dr-elephant.git && \
+RUN git clone https://github.com/wendaoheri/dr-elephant.git && \
    cd dr-elephant; npm install -g bower; cd web; bower install --allow-root; cd .. && \
    ./compile.sh ../compile.conf
 
