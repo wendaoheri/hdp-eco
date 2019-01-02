@@ -24,7 +24,8 @@ ENV KAFKA_HOME /opt/kafka
 ENV ZOOKEEPER_HOME /opt/zookeeper
 ENV ALLUXIO_HOME /opt/alluxio
 ENV FLINK_HOME /opt/flink
-ENV PATH ${JAVA_HOME}/bin:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${SCALA_HOME}/bin:${HIVE_HOME}/bin:${HBASE_HOME}/bin:${KAFKA_HOME}/bin:${ZOOKEEPER_HOME}/bin:${M2_HOME}/bin:${ALLUXIO_HOME}/bin:${FLINK_HOME}/bin:${PATH}
+ENV ACTIVATOR_HOME /opt/activator
+ENV PATH ${ACTIVATOR_HOME}/bin:${JAVA_HOME}/bin:${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${SCALA_HOME}/bin:${HIVE_HOME}/bin:${HBASE_HOME}/bin:${KAFKA_HOME}/bin:${ZOOKEEPER_HOME}/bin:${M2_HOME}/bin:${ALLUXIO_HOME}/bin:${FLINK_HOME}/bin:${PATH}
 
 ADD config/hadoop/* $HADOOP_HOME/etc/hadoop/
 ADD config/hive/* $HIVE_HOME/conf/
