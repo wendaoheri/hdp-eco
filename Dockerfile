@@ -34,7 +34,6 @@ ADD config/spark/* ${SPARK_HOME}/conf/
 ADD config/kafka/* ${KAFKA_HOME}/conf/
 ADD config/alluxio/* ${ALLUXIO_HOME}/conf/
 ADD config/flink/* ${FLINK_HOME}/conf/
-ADD config/dr-elephant/compile.conf /
 
 RUN mkdir -p /var/hadoop/dfs/name && \ 
    mkdir -p /var/hadoop/dfs/data && \
@@ -52,7 +51,7 @@ RUN alluxio format
 # install dr.elephant
 RUN git clone https://github.com/wendaoheri/dr-elephant.git && \
    cd dr-elephant; npm install -g bower; cd web; bower install --allow-root; cd .. && \
-   ./compile.sh ../compile.conf
+   ./compile.sh ./compile.conf
 
 # ssh
 EXPOSE 22
