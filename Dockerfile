@@ -52,7 +52,7 @@ RUN alluxio format
 RUN git clone https://github.com/wendaoheri/dr-elephant.git && \
    # cd dr-elephant; npm install -g bower; cd web; bower install --allow-root; cd .. && \
    # ./compile.sh ./compile.conf
-   cd dr-elephant; activator -Dhadoopversion=2.7.3 -Dsparkversion=2.4.0 -Dsbt.repository.config=app-conf/resolver.conf clean test compile dist
+   cd dr-elephant; sbt -Dhadoopversion=2.7.3 -Dsparkversion=2.4.0 -Dsbt.repository.config=app-conf/resolver.conf clean test compile dist
 
 # ssh
 EXPOSE 22
