@@ -1,1 +1,1 @@
-docker run -d -it --privileged registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop /usr/sbin/init
+docker run  -it --privileged registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop /usr/sbin/init

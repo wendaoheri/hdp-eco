@@ -7,4 +7,10 @@ RUN yum install -y hadoop-hdfs-namenode hadoop-hdfs-secondarynamenode hadoop-hdf
 ADD config /etc/hadoop/conf.my_cluster
 
 RUN alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.my_cluster 50 && \
-    alternatives --set hadoop-conf /etc/hadoop/conf.my_cluster
+    alternatives --set hadoop-conf /etc/hadoop/conf.my_cluster 
+
+USER hdfs
+
+RUN hdfs namenode -format
+
+ENTRYPOINT [ "/usr/sbin/init" ]
