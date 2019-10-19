@@ -13,4 +13,6 @@ USER hdfs
 
 RUN hdfs namenode -format
 
+USER root
+
 ENTRYPOINT [ "/usr/sbin/init" ]
