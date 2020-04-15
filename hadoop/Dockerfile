@@ -1,18 +1,12 @@
 FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hdp-eco-base
 
-USER root
+RUN groupadd hadoop
+RUN useradd -d /home/hadoop -m -g hadoop hadoop
 
-RUN yum install -y hadoop-hdfs-namenode hadoop-hdfs-secondarynamenode hadoop-hdfs-datanode hadoop-httpfs hadoop-yarn-resourcemanager hadoop-yarn-nodemanager hadoop-mapreduce-historyserver
+RUN wget https://downloads.apache.org/hadoop/common/hadoop-2.10.0/hadoop-2.10.0.tar.gz && \
+    tar -xvf hadoop-2.10.0.tar.gz -C /usr/lib && \
+    rm -rf hadoop-2.10.0.tar.gz && \
+    ln -s /usr/lib/hadoop-2.10.0 /usr/lib/hadoop && \
+    chown -R hadoop:hadoop /usr/lib/hadoop
 
-ADD config /etc/hadoop/conf.my_cluster
-
-RUN alternatives --install /etc/hadoop/conf hadoop-conf /etc/hadoop/conf.my_cluster 50 && \
-    alternatives --set hadoop-conf /etc/hadoop/conf.my_cluster 
-
-USER hdfs
-
-RUN hdfs namenode -format
-
-USER root
-
-ENTRYPOINT [ "/usr/sbin/init" ]
+USER hadoop
