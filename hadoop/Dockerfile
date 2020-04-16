@@ -7,7 +7,7 @@ RUN wget -q https://apache.mirrors.lucidnetworks.net/hadoop/common/hadoop-2.10.0
     tar -xf hadoop-2.10.0.tar.gz -C /usr/lib && \
     rm -rf hadoop-2.10.0.tar.gz && \
     ln -s /usr/lib/hadoop-2.10.0 /usr/lib/hadoop && \
-    chown -R hadoop:hadoop /usr/lib/hadoop
+    chown -R hadoop:hadoop /usr/lib/hadoop /usr/lib/hadoop-2.10.0
 
 ENV HADOOP_HOME /usr/lib/hadoop
 ENV PATH ${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${PATH}
