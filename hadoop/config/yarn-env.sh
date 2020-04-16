@@ -89,6 +89,7 @@ IFS=
 
 
 # default log directory & file
+export YARN_LOG_DIR=/var/log/hadoop-yarn
 if [ "$YARN_LOG_DIR" = "" ]; then
   YARN_LOG_DIR="$HADOOP_YARN_HOME/logs"
 fi
