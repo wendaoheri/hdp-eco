@@ -22,14 +22,14 @@ RUN useradd -d /home/yarn -m -g hadoop yarn
 
 RUN mkdir -p /var/hadoop/dfs/name && \ 
    mkdir -p /var/hadoop/dfs/data && \
-   mkdir -p /var/hadoop/dfs/namesecondary && \
-   chown -R hdfs:hadoop /var/hadoop/dfs/name /var/hadoop/dfs/data /var/hadoop/dfs/namesecondary
+   mkdir -p /var/hadoop/dfs/snn && \
+   chown -R hdfs:hadoop /var/hadoop/dfs/name /var/hadoop/dfs/data /var/hadoop/dfs/snn
 
 USER hdfs
 
 RUN hdfs namenode -format
 
-COPY config/supervisor.d/* /etc/supervisor.d/
+COPY supervisor.d/* /etc/supervisor.d/
 
 EXPOSE 8020 8888 50070
 
