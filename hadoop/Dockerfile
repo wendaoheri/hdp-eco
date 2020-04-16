@@ -31,4 +31,6 @@ RUN hdfs namenode -format
 
 COPY config/supervisor.d/* /etc/supervisor.d/
 
+EXPOSE 8020 8888 50070
+
 ENTRYPOINT [ "supervisord", "-c" , "/etc/supervisord.conf" ]
