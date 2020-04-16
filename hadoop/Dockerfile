@@ -23,11 +23,17 @@ RUN useradd -d /home/yarn -m -g hadoop yarn
 RUN mkdir -p /var/hadoop/dfs/name && \ 
    mkdir -p /var/hadoop/dfs/data && \
    mkdir -p /var/hadoop/dfs/snn && \
-   chown -R hdfs:hadoop /var/hadoop/dfs/name /var/hadoop/dfs/data /var/hadoop/dfs/snn
+   mkdir -p /var/log/hadoop-hdfs && \
+   chown -R hdfs:hadoop /var/hadoop/dfs/name /var/hadoop/dfs/data /var/hadoop/dfs/snn /var/log/hadoop-hdfs
 
 USER hdfs
 
 RUN hdfs namenode -format
+
+USER root
+
+RUN mkdir -p /var/log/hadoop-yarn && \
+    chown -R yarn:hadoop /var/log/hadoop-yarn
 
 COPY supervisor.d/* /etc/supervisor.d/
 
