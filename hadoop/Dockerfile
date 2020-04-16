@@ -12,7 +12,9 @@ RUN wget -q https://downloads.apache.org/hadoop/common/hadoop-2.10.0/hadoop-2.10
 ENV HADOOP_HOME /usr/lib/hadoop
 ENV PATH ${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${PATH}
 
-COPY --chown=hadoop:hadoop config/* ${HADOOP_HOME}/etc/hadoop/
+COPY config/* ${HADOOP_HOME}/etc/hadoop/
+
+RUN chown -R hadoop:hadoop ${HADOOP_HOME}/etc/hadoop/
 
 RUN useradd -d /home/hdfs -m -g hadoop hdfs
 RUN useradd -d /home/yarn -m -g hadoop yarn
