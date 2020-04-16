@@ -1,1 +1,0 @@
-docker run  -idt --privileged registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop

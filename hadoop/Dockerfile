@@ -26,3 +26,7 @@ RUN mkdir -p /var/hadoop/dfs/name && \
 USER hdfs
 
 RUN hdfs namenode -format
+
+COPY config/supervisor.d/* /etc/supervisor.d/
+
+ENTRYPOINT [ "supervisord", "-c" , "/etc/supervisord.conf" ]
