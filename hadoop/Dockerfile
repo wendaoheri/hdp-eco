@@ -41,6 +41,6 @@ RUN mkdir -p /var/log/hadoop-yarn && \
 
 COPY supervisor.d/* /etc/supervisor.d/
 
-EXPOSE 8020 8888 50070
+EXPOSE 8020 8088 50070 50075
 
 ENTRYPOINT [ "supervisord", "-c" , "/etc/supervisord.conf" ]
