@@ -26,3 +26,10 @@ RUN chown -R hadoop:hadoop ${HIVE_HOME}/conf/
 RUN chown -R hadoop:hadoop ${HIVE_HOME}/bin/
 
 RUN useradd -d /home/hive -m -g hadoop hive
+
+## delete hadoop supervisor config
+RUN rm -rf /etc/supervisor.d/hadoop.conf
+
+COPY supervisor.d/* /etc/supervisor.d/
+
+EXPOSE 10000
