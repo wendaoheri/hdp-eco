@@ -121,7 +121,7 @@ case $startStop in
     hadoop_rotate_log $log
     echo starting $command, logging to $log
     cd "$HADOOP_YARN_HOME"
-    nohup nice -n $YARN_NICENESS "$HADOOP_YARN_HOME"/bin/yarn --config $YARN_CONF_DIR $command "$@" > "$log" 2>&1 < /dev/null &
+    nice -n $YARN_NICENESS "$HADOOP_YARN_HOME"/bin/yarn --config $YARN_CONF_DIR $command "$@" > "$log" 2>&1 < /dev/null
     echo $! > $pid
     sleep 1
     head "$log"
