@@ -7,11 +7,12 @@ RUN wget -q https://apache.mirrors.lucidnetworks.net/hive/hive-2.3.7/apache-hive
     chown -R hadoop:hadoop /usr/lib/apache-hive-2.3.7-bin /usr/lib/hive
 
 RUN wget -q https://cdn.mysql.com//archives/mysql-connector-java-8.0/mysql-connector-java-8.0.11.zip && \
-    unzip mysql-connector-java-8.0.11.zip  && \
+    unzip -q mysql-connector-java-8.0.11.zip  && \
     mkdir -p /usr/share/java && \
     mv mysql-connector-java-8.0.11/mysql-connector-java-8.0.11.jar /usr/share/java && \
     ln -s /usr/share/java/mysql-connector-java-8.0.11.jar /usr/share/java/mysql-connector-java.jar && \
     ln -s /usr/share/java/mysql-connector-java.jar /usr/lib/hive/lib/mysql-connector-java.jar && \
+    chown hadoop:hadoop /usr/share/java/mysql-connector-java-8.0.11.jar /usr/share/java/mysql-connector-java.jar /usr/lib/hive/lib/mysql-connector-java.jar && \
     rm -rf mysql-connector-java-8.0.11*
 
 ENV HIVE_HOME /usr/lib/hive
