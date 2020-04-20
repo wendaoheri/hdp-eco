@@ -13,8 +13,12 @@ ENV HADOOP_HOME /usr/lib/hadoop
 ENV PATH ${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${PATH}
 
 COPY config/* ${HADOOP_HOME}/etc/hadoop/
+COPY bin/* ${HADOOP_HOME}/bin/
+COPY sbin/* ${HADOOP_HOME}/sbin/
 
 RUN chown -R hadoop:hadoop ${HADOOP_HOME}/etc/hadoop/
+RUN chown -R hadoop:hadoop ${HADOOP_HOME}/bin/
+RUN chown -R hadoop:hadoop ${HADOOP_HOME}/sbin/
 
 RUN useradd -d /home/hdfs -m -g hadoop hdfs
 RUN useradd -d /home/yarn -m -g hadoop yarn
