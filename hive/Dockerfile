@@ -33,5 +33,3 @@ RUN rm -rf /etc/supervisor.d/hadoop.conf
 COPY supervisor.d/* /etc/supervisor.d/
 
 EXPOSE 10000
-
-CMD ["schematool","-dbType","mysql","-initSchema"]
