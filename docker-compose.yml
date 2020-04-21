@@ -1,0 +1,26 @@
+version: '3'
+services:
+  hadoop:
+    container_name: hadoop
+    ports:
+      - 9001:9001
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop
+  
+  hive:
+    container_name: hive
+    links: 
+      - mysql:mysql
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hive
+    depends_on:
+      - mysql
+      - hadoop
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0.11
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 111111
+    ports:
+      - 3306:3306
