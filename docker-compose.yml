@@ -5,6 +5,7 @@ services:
     ports:
       - 9001:9001
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop
+    hostname: hadoop
   
   hive:
     container_name: hive
@@ -14,6 +15,7 @@ services:
     depends_on:
       - mysql
       - hadoop
+    hostname: hive
 
   mysql:
     container_name: mysql
@@ -24,3 +26,4 @@ services:
       MYSQL_ROOT_PASSWORD: 111111
     ports:
       - 3306:3306
+    hostname: mysql
