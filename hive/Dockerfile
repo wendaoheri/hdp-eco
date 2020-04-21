@@ -32,4 +32,7 @@ RUN rm -rf /etc/supervisor.d/hadoop.conf
 
 COPY supervisor.d/* /etc/supervisor.d/
 
+RUN mkdir -p /var/log/hive && \
+    chown -R hive:hadoop /var/log/hive
+
 EXPOSE 10000
