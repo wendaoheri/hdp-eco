@@ -21,4 +21,8 @@
       <name>fs.defaultFS</name>
       <value>hdfs://localhost:8020</value>
   </property>
+  <property>
+      <name>fs.permissions.umask-mode</name>
+      <value>002</value>
+  </property>
 </configuration>
