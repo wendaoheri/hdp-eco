@@ -1,11 +1,19 @@
 version: '3'
 services:
-  hadoop:
-    container_name: hadoop
+  manager:
+    container_name: manager
     ports:
       - 9001:9001
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hdp-eco-base
+    hostname: manager
+    enrtypoint: supervisord -c /etc/supervisord-manager.conf
+
+  hadoop:
+    container_name: hadoop
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop
     hostname: hadoop
+    depends_on:
+      - manager
   
   hive:
     container_name: hive
@@ -15,6 +23,7 @@ services:
     depends_on:
       - mysql
       - hadoop
+      - manager
     hostname: hive
 
   mysql:
