@@ -25,4 +25,5 @@
       <name>fs.permissions.umask-mode</name>
       <value>002</value>
   </property>
+
 </configuration>
