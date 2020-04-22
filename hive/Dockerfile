@@ -35,4 +35,10 @@ COPY supervisor.d/* /etc/supervisor.d/
 RUN mkdir -p /var/log/hive && \
     chown -R hive:hadoop /var/log/hive
 
+COPY entrypoint.sh .
+
+RUN chown hive:hadoop  entrypoint.sh && chmod +x entrypoint.sh
+
+ENTRYPOINT [ "entrypoint.sh" ]
+
 EXPOSE 10000
