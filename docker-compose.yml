@@ -6,7 +6,7 @@ services:
       - 9001:9001
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hdp-eco-base
     hostname: manager
-    enrtypoint: supervisord -c /etc/supervisord-manager.conf
+    entrypoint: supervisord -c /etc/supervisord-manager.conf
 
   hadoop:
     container_name: hadoop
