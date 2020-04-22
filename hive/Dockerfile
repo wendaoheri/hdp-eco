@@ -39,6 +39,6 @@ COPY entrypoint.sh /
 
 RUN chown hive:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]
 
 EXPOSE 10000
