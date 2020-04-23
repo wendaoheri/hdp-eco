@@ -13,6 +13,8 @@ services:
     hostname: hadoop
     depends_on:
       - manager
+    ports:
+      - 50070:50070
   
   hive:
     container_name: hive
@@ -34,6 +36,8 @@ services:
       - "8888:8888"
     volumes:
       - ./hue/hue.ini:/usr/share/hue/desktop/conf/z-hue.ini
+      - ./hue/wait-for-it.sh:/usr/share/hue/wait-for-it.sh
+    entrypoint: /usr/share/hue/wait-for-it.sh mysql:3306 --timeout=30 --strict -- /usr/share/hue/startup.sh
     depends_on:
       - mysql
       - hadoop
@@ -54,3 +58,18 @@ services:
     ports:
       - 3306:3306
     hostname: mysql
+  
+  adminer:
+    image: adminer
+    restart: always
+    hostname: adminer
+    container_name: adminer
+    ports:
+      - 18080:8080
+  
+  # miniconda:
+  #   image: continuumio/miniconda
+  #   container_name: miniconda
+  #   command: /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser"
+  #   ports:
+  #     - 18888:8888
