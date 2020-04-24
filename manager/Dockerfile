@@ -7,7 +7,7 @@ RUN mkdir ${CESI_SETUP_PATH}
 
 WORKDIR ${CESI_SETUP_PATH}
 
-RUN wget https://github.com/gamegos/cesi/releases/download/v${CESI_VERSION}/cesi-extended.tar.gz -O cesi.tar.gz && \
+RUN wget -q https://github.com/gamegos/cesi/releases/download/v${CESI_VERSION}/cesi-extended.tar.gz -O cesi.tar.gz && \
     tar -xf cesi.tar.gz && \
     pip3 install -r requirements.txt && \
     pip3 install gunicorn
@@ -17,3 +17,5 @@ COPY conf/* /etc/
 COPY supervisor.d/* /etc/supervisor.d/
 
 RUN mkdir -p /var/log/cesi
+
+EXPOSE 5000
