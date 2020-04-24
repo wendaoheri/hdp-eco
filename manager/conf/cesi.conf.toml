@@ -15,9 +15,25 @@ admin_password = "admin"        # Password of admin user
 
 # This is the definition section for new supervisord node.
 [[nodes]]
-name = "manager"          # (String) Unique name for supervisord node.
-# environment = ""      # (String) The environment name provides logical grouping of supervisord nodes. It can be used as filtering option in the UI.
-username = "admin"         # (String) Username of the XML-RPC interface of supervisord Set nothing if no username is configured
-password = "admin"         # (String) Password of the XML-RPC interface of supervisord. Set nothing if no username is configured
-host = "127.0.0.1"    # (String) Host of the XML-RPC interface of supervisord
-port = "9001"         # (String) Port of the XML-RPC interface of supervisord
+name = "manager"
+environment = ""
+username = "admin"
+password = "admin"
+host = "127.0.0.1"
+port = "9001"
+
+[[nodes]]
+name = "hadoop"
+environment = ""
+username = "admin"
+password = "admin"
+host = "hadoop"
+port = "9001"
+
+[[nodes]]
+name = "hive"
+environment = ""
+username = "admin"
+password = "admin"
+host = "hive"
+port = "9001"
