@@ -10,7 +10,8 @@ WORKDIR ${CESI_SETUP_PATH}
 RUN wget -q https://github.com/gamegos/cesi/releases/download/v${CESI_VERSION}/cesi-extended.tar.gz -O cesi.tar.gz && \
     tar -xf cesi.tar.gz && \
     pip3 install -r requirements.txt && \
-    pip3 install gunicorn
+    pip3 install gunicorn && \
+    rm -rf cesi.tar.gz
 
 COPY conf/* /etc/
 

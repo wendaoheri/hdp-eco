@@ -13,7 +13,7 @@ activity_log = "/var/log/cesi/activity.log"   # File path for CeSI logs
 admin_username = "admin"        # Username of admin user
 admin_password = "admin"        # Password of admin user
 
-This is the definition section for new supervisord node.
+# This is the definition section for new supervisord node.
 [[nodes]]
 name = "manager"          # (String) Unique name for supervisord node.
 # environment = ""      # (String) The environment name provides logical grouping of supervisord nodes. It can be used as filtering option in the UI.
