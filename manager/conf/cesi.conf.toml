@@ -37,3 +37,11 @@ username = "admin"
 password = "admin"
 host = "hive"
 port = "9001"
+
+[[nodes]]
+name = "kafka"
+environment = ""
+username = "admin"
+password = "admin"
+host = "kafka"
+port = "9001"

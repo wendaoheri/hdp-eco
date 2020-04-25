@@ -6,8 +6,6 @@ services:
       - 5000:5000
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/manager
     hostname: manager
-    depends_on: 
-      - mysql
     volumes: 
       - ./manager/conf/cesi.conf.toml:/etc/cesi.conf.toml
   hadoop:
@@ -46,7 +44,14 @@ services:
       - mysql
       - hadoop
       - hive
-
+  kafka:
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/kafka
+    container_name: kafka
+    hostname: kafka
+    ports:
+      - 9092:9092
+      - 2181:2181
+  
   mysql:
     container_name: mysql
     image: mysql:8.0.11
@@ -70,10 +75,3 @@ services:
     container_name: adminer
     ports:
       - 18080:8080
-  
-  # miniconda:
-  #   image: continuumio/miniconda
-  #   container_name: miniconda
-  #   command: /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser"
-  #   ports:
-  #     - 18888:8888
