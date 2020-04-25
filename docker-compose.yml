@@ -16,6 +16,7 @@ services:
     hostname: hadoop
     ports:
       - 50070:50070
+      - 8088:8088
     volumes: 
       - ./hadoop/config/:/usr/lib/hadoop/etc/hadoop/
   
@@ -30,6 +31,7 @@ services:
     hostname: hive
     volumes:
       - ./hive/conf/:/usr/lib/hive/conf/
+      - ./hadoop/config/:/usr/lib/hadoop/etc/hadoop/
   hue:
     image: gethue/hue:latest
     hostname: hue
