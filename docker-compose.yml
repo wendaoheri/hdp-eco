@@ -8,6 +8,7 @@ services:
     hostname: manager
     volumes: 
       - ./manager/conf/cesi.conf.toml:/etc/cesi.conf.toml
+      
   hadoop:
     container_name: hadoop
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop
@@ -30,6 +31,7 @@ services:
     volumes:
       - ./hive/conf/:/usr/lib/hive/conf/
       - ./hadoop/config/:/usr/lib/hadoop/etc/hadoop/
+
   hue:
     image: gethue/hue:latest
     hostname: hue
@@ -44,6 +46,17 @@ services:
       - mysql
       - hadoop
       - hive
+
+  spark:
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/spark
+    hostname: spark
+    container_name: spark
+    volumes:
+      - ./spark/conf/:/usr/lib/spark/conf/
+    depends_on: 
+      - hive
+      - hadoop
+
   kafka:
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/kafka
     container_name: kafka
