@@ -25,4 +25,8 @@
         <name>yarn.webapp.ui2.enable</name>
         <value>true</value>
     </property>
+    <property>
+        <name>yarn.nodemanager.vmem-pmem-ratio</name>
+        <value>3</value>
+    </property>
 </configuration>
