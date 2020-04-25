@@ -22,8 +22,9 @@ ENV PATH ${HIVE_HOME}/bin:${PATH}
 COPY conf/* ${HIVE_HOME}/conf/
 COPY bin/* ${HIVE_HOME}/bin/
 
-RUN chown -R hadoop:hadoop ${HIVE_HOME}/conf/
-RUN chown -R hadoop:hadoop ${HIVE_HOME}/bin/
+RUN chown -R hadoop:hadoop ${HIVE_HOME}/conf/ ${HIVE_HOME}/bin/ && \
+    chmod 775 -R ${HIVE_HOME}/conf/ ${HIVE_HOME}/bin/ && \
+    chmod 775 -R /tmp/hive
 
 RUN useradd -d /home/hive -m -g hadoop hive
 
@@ -33,7 +34,8 @@ RUN rm -rf /etc/supervisor.d/hadoop.conf
 COPY supervisor.d/* /etc/supervisor.d/
 
 RUN mkdir -p /var/log/hive && \
-    chown -R hive:hadoop /var/log/hive
+    chown -R hive:hadoop /var/log/hive && \
+    chmod 775 -R /var/log/hive
 
 COPY entrypoint.sh /
 
