@@ -16,7 +16,13 @@ COPY bin/* ${SPARK_HOME}/bin/
 COPY sbin/* ${SPARK_HOME}/sbin/
 
 RUN chown -R spark:hadoop ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/ && \
-    chmod 775  -R ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/
+    chmod 775 -R ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/
 
 COPY supervisor.d/* /etc/supervisor.d/
 RUN rm -rf /etc/supervisor.d/hive.conf
+
+RUN mkdir -p /var/log/spark && \
+    chown -R spark:hadoop /var/log/spark && \
+    chmod 775 -R /var/log/spark
+
+ENTRYPOINT [ "supervisord", "-c" , "/etc/supervisord.conf" ]
