@@ -24,7 +24,7 @@ COPY bin/* ${HIVE_HOME}/bin/
 
 RUN chown -R hadoop:hadoop ${HIVE_HOME}/conf/ ${HIVE_HOME}/bin/ && \
     chmod 775 -R ${HIVE_HOME}/conf/ ${HIVE_HOME}/bin/ && \
-    chmod 775 -R /tmp/hive
+    mkdir /tmp/hive && chown hive:hadoop /tmp/hive && chmod 775 -R /tmp/hive
 
 RUN useradd -d /home/hive -m -g hadoop hive
 
