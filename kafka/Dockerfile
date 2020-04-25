@@ -15,8 +15,8 @@ ENV PATH ${KAFKA_HOME}/bin:${PATH}
 COPY config/* ${KAFKA_HOME}/config/
 COPY bin/* ${KAFKA_HOME}/bin/
 
-RUN chown -R kafka:hadoop ${KAFKA_HOME}/config/
-RUN chown -R kafka:hadoop ${KAFKA_HOME}/bin/
+RUN chown -R kafka:hadoop ${KAFKA_HOME}/config/ ${KAFKA_HOME}/bin/ && \
+    chmod 775  -R ${KAFKA_HOME}/bin/ ${KAFKA_HOME}/config/
 
 COPY supervisor.d/* /etc/supervisor.d/
 
