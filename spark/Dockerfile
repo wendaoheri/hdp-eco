@@ -13,28 +13,35 @@ RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}.tar.gz -O 
     tar -xf spark.tar.gz && \
     cd spark-${SPARK_VERSION} && \
     export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g" && \
-    ./dev/make-distribution.sh --name spark --pip --tgz -q -Phive -Phive-thriftserver -Pyarn -Phadoop-provided -Phive-provided -Dhadoop.version=${HADOOP_VERSION}
+    ./dev/make-distribution.sh --name spark --pip -q -Phive -Phive-thriftserver -Pyarn -Phadoop-provided -Phive-provided -Dhadoop.version=${HADOOP_VERSION} && \
+    mv /home/hadoop/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-spark ~ && \
+    cd ~ && rm -rf spark.tar.gz spark-${SPARK_VERSION} .m2
 
+USER root
 
-# ENV SPARK_HOME /usr/lib/spark
-# ENV PATH ${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${PATH}
+RUN mv /home/hadoop/spark-${SPARK_VERSION}-bin-spark /usr/lib && \
+    ln -s /usr/lib/spark-${SPARK_VERSION}-bin-spark /usr/lib/spark && \
+    chmod 775 -R /usr/lib/spark-${SPARK_VERSION}-bin-spark /usr/lib/spark
 
-# COPY conf/* ${SPARK_HOME}/conf/
-# COPY bin/* ${SPARK_HOME}/bin/
-# COPY sbin/* ${SPARK_HOME}/sbin/
+ENV SPARK_HOME /usr/lib/spark
+ENV PATH ${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${PATH}
 
-# RUN chown -R spark:hadoop ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/ && \
-#     chmod 775 -R ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/
+COPY conf/* ${SPARK_HOME}/conf/
+COPY bin/* ${SPARK_HOME}/bin/
+COPY sbin/* ${SPARK_HOME}/sbin/
 
-# COPY supervisor.d/* /etc/supervisor.d/
-# RUN rm -rf /etc/supervisor.d/hive.conf
+RUN chown -R spark:hadoop ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/ && \
+    chmod 775 -R ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/
 
-# RUN mkdir -p /var/log/spark && \
-#     chown -R spark:hadoop /var/log/spark && \
-#     chmod 775 -R /var/log/spark
+COPY supervisor.d/* /etc/supervisor.d/
+RUN rm -rf /etc/supervisor.d/hive.conf
 
-# COPY entrypoint.sh /
+RUN mkdir -p /var/log/spark && \
+    chown -R spark:hadoop /var/log/spark && \
+    chmod 775 -R /var/log/spark
 
-# RUN chown spark:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
+COPY entrypoint.sh /
 
-# ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]
+RUN chown spark:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]
