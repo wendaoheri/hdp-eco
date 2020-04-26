@@ -14,7 +14,7 @@ RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}.tar.gz -O 
     cd spark-${SPARK_VERSION} && \
     export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g" && \
     ./dev/make-distribution.sh --name spark --pip -Phive -Phive-thriftserver -Pyarn -Phadoop-provided -Phive-provided -Dhadoop.version=${HADOOP_VERSION} && \
-    mv ~/spark-${SPARK_VERSION}/dist ~/spark-${SPARK_VERSION}-bin-spark ~ && \
+    mv ~/spark-${SPARK_VERSION}/dist ~/spark-${SPARK_VERSION}-bin-spark && \
     cd ~ && rm -rf spark.tar.gz spark-${SPARK_VERSION} .m2
 
 USER root
