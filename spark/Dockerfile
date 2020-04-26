@@ -7,8 +7,8 @@ RUN useradd -d /home/spark -m -g hadoop spark
 USER hadoop
 WORKDIR /home/hadoop
 
-RUN wget https://github.com/apache/spark/archive/v${SPARK_VERSION}}.tar.gz -O spark.tar.gz && \
-    tar -xvf spark.tar.gz
+RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}.tar.gz -O spark.tar.gz && \
+    tar -xf spark.tar.gz
 
 
 # ENV SPARK_HOME /usr/lib/spark
