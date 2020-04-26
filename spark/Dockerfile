@@ -11,7 +11,7 @@ RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}.tar.gz -O 
     tar -xf spark.tar.gz && \
     cd spark-${SPARK_VERSION} && \
     export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g" && \
-    ./dev/make-distribution.sh --name spark-${SPARK_VERSION} --pip --tgz -Phive -Phive-thriftserver -Pyarn -Phadoop-provided -Phive-provided -Dhadoop.version=${HADOOP_VERSION} -Dhive.version.short=${HIVE_VERSION} -Dhive.version=${HIVE_VERSION}.spark2
+    ./dev/make-distribution.sh --name spark --pip --tgz -Phive -Phive-thriftserver -Pyarn -Phadoop-provided -Phive-provided -Dhadoop.version=${HADOOP_VERSION} -Dhive.version.short=2.3 -Dhive.version=${HIVE_VERSION}
 
 
 # ENV SPARK_HOME /usr/lib/spark
