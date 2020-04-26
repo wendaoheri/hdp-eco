@@ -25,4 +25,8 @@ RUN mkdir -p /var/log/spark && \
     chown -R spark:hadoop /var/log/spark && \
     chmod 775 -R /var/log/spark
 
-ENTRYPOINT [ "supervisord", "-c" , "/etc/supervisord.conf" ]
+COPY entrypoint.sh /
+
+RUN chown spark:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]
