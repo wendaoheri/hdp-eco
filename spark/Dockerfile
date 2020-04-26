@@ -1,32 +1,34 @@
 FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hive
 
+ENV SPARK_VERSION 2.4.5
+
 RUN useradd -d /home/spark -m -g hadoop spark
 
-RUN wget -q https://downloads.apache.org/spark/spark-2.4.5/spark-2.4.5-bin-hadoop2.7.tgz && \
-    tar -xf spark-2.4.5-bin-hadoop2.7.tgz -C /usr/lib && \
-    rm -rf spark-2.4.5-bin-hadoop2.7.tgz && \
-    ln -s /usr/lib/spark-2.4.5-bin-hadoop2.7 /usr/lib/spark && \
-    chown -R hadoop:hadoop /usr/lib/spark /usr/lib/spark-2.4.5-bin-hadoop2.7
+USER hadoop
+WORKDIR /home/hadoop
 
-ENV SPARK_HOME /usr/lib/spark
-ENV PATH ${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${PATH}
+RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}}.tar.gz -O spark.tar.gz && \
+    tar -xf spark.tar.gz
 
-COPY conf/* ${SPARK_HOME}/conf/
-COPY bin/* ${SPARK_HOME}/bin/
-COPY sbin/* ${SPARK_HOME}/sbin/
+# ENV SPARK_HOME /usr/lib/spark
+# ENV PATH ${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${PATH}
 
-RUN chown -R spark:hadoop ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/ && \
-    chmod 775 -R ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/
+# COPY conf/* ${SPARK_HOME}/conf/
+# COPY bin/* ${SPARK_HOME}/bin/
+# COPY sbin/* ${SPARK_HOME}/sbin/
 
-COPY supervisor.d/* /etc/supervisor.d/
-RUN rm -rf /etc/supervisor.d/hive.conf
+# RUN chown -R spark:hadoop ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/ && \
+#     chmod 775 -R ${SPARK_HOME}/conf/ ${SPARK_HOME}/bin/ ${SPARK_HOME}/sbin/
 
-RUN mkdir -p /var/log/spark && \
-    chown -R spark:hadoop /var/log/spark && \
-    chmod 775 -R /var/log/spark
+# COPY supervisor.d/* /etc/supervisor.d/
+# RUN rm -rf /etc/supervisor.d/hive.conf
 
-COPY entrypoint.sh /
+# RUN mkdir -p /var/log/spark && \
+#     chown -R spark:hadoop /var/log/spark && \
+#     chmod 775 -R /var/log/spark
 
-RUN chown spark:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
+# COPY entrypoint.sh /
 
-ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]
+# RUN chown spark:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
+
+# ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]
