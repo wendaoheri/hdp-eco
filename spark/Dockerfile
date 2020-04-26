@@ -4,6 +4,8 @@ ENV SPARK_VERSION 2.4.5
 
 RUN useradd -d /home/spark -m -g hadoop spark
 
+RUN ln -sf /usr/bin/python3 /usr/bin/python
+
 USER hadoop
 WORKDIR /home/hadoop
 
