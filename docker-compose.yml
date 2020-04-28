@@ -55,9 +55,12 @@ services:
       - ./hive/conf/:/usr/lib/hive/conf/
       - ./hadoop/config/:/usr/lib/hadoop/etc/hadoop/
       - ./spark/conf/:/usr/lib/spark/conf/
+      - ./spark/livy/:/usr/lib/livy/conf/
     depends_on: 
       - hive
       - hadoop
+    ports: 
+      - 8998:8998
 
   kafka:
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/kafka
