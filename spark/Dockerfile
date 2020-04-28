@@ -4,8 +4,6 @@ ENV SPARK_VERSION 2.4.5
 
 RUN useradd -d /home/spark -m -g hadoop spark
 
-RUN ln -sf /usr/bin/python3 /usr/bin/python
-
 USER hadoop
 WORKDIR /home/hadoop
 
@@ -13,7 +11,7 @@ RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}.tar.gz -O 
     tar -xf spark.tar.gz && \
     cd spark-${SPARK_VERSION} && \
     export MAVEN_OPTS="-Xmx2g -XX:ReservedCodeCacheSize=1g" && \
-    ./dev/make-distribution.sh --name spark --pip -Phive -Phive-thriftserver -Pyarn -Phadoop-provided -Phive-provided -Dhadoop.version=${HADOOP_VERSION} && \
+    ./dev/make-distribution.sh --name spark -Phive -Phive-thriftserver -Pyarn -Dhadoop.version=${HADOOP_VERSION} && \
     mv ~/spark-${SPARK_VERSION}/dist ~/spark-${SPARK_VERSION}-bin-spark && \
     cd ~ && rm -rf spark.tar.gz spark-${SPARK_VERSION} .m2
 
