@@ -1,6 +1,7 @@
 FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hive
 
 ENV SPARK_VERSION 2.4.5
+ENV LIVY_VERSION 0.7.0-incubating
 
 RUN useradd -d /home/spark -m -g hadoop spark
 
@@ -17,12 +18,20 @@ RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}.tar.gz -O 
 
 USER root
 
+RUN wget -q http://archive.apache.org/dist/incubator/livy/${LIVY_VERSION}/apache-livy-${LIVY_VERSION}-bin.zip && \
+    unzip -q apache-livy-${LIVY_VERSION}-bin.zip && \
+    mv apache-livy-${LIVY_VERSION}-bin /usr/lib && \
+    ln -s /usr/lib/apache-livy-${LIVY_VERSION}-bin /usr/lib/livy && \
+    rm -rf apache-livy-${LIVY_VERSION}-bin.zip && \
+    chown -R hadoop:hadoop /usr/lib/apache-livy-${LIVY_VERSION}-bin /usr/lib/livy
+
 RUN mv /home/hadoop/spark-${SPARK_VERSION}-bin-spark /usr/lib && \
     ln -s /usr/lib/spark-${SPARK_VERSION}-bin-spark /usr/lib/spark && \
     chmod 775 -R /usr/lib/spark-${SPARK_VERSION}-bin-spark /usr/lib/spark
 
 ENV SPARK_HOME /usr/lib/spark
-ENV PATH ${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${PATH}
+ENV LIVY_HOME /usr/lib/livy
+ENV PATH ${SPARK_HOME}/bin:${SPARK_HOME}/sbin:${LIVY_VERSION}/bin:${PATH}
 
 COPY conf/* ${SPARK_HOME}/conf/
 COPY bin/* ${SPARK_HOME}/bin/
