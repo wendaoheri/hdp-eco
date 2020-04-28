@@ -5,7 +5,7 @@ RUN useradd -d /home/hadoop -m -g hadoop hadoop
 
 ENV HADOOP_VERSION 2.10.0
 
-RUN wget -q https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
+RUN wget -q https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz && \
     tar -xf hadoop-${HADOOP_VERSION}.tar.gz -C /usr/lib && \
     rm -rf hadoop-${HADOOP_VERSION}.tar.gz && \
     ln -s /usr/lib/hadoop-${HADOOP_VERSION} /usr/lib/hadoop && \
