@@ -1,6 +1,6 @@
 FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hadoop
 
-ENV HIVE_VERSION 2.3.7
+ENV HIVE_VERSION 2.3.3
 ENV HIVE_VERSION_SHORT 2.3
 
 RUN wget -q https://downloads.apache.org/hive/hive-${HIVE_VERSION}/apache-hive-${HIVE_VERSION}-bin.tar.gz && \
