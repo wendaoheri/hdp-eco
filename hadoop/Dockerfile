@@ -13,6 +13,7 @@ RUN wget -q https://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSIO
     rm -rf /usr/lib/hadoop/share/doc
 
 ENV HADOOP_HOME /usr/lib/hadoop
+ENV HADOOP_CONF_DIR ${HADOOP_HOME}/etc/hadoop
 ENV PATH ${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${PATH}
 
 COPY config/* ${HADOOP_HOME}/etc/hadoop/
