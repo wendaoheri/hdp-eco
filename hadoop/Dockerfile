@@ -9,7 +9,8 @@ RUN wget -q https://downloads.apache.org/hadoop/common/hadoop-${HADOOP_VERSION}/
     tar -xf hadoop-${HADOOP_VERSION}.tar.gz -C /usr/lib && \
     rm -rf hadoop-${HADOOP_VERSION}.tar.gz && \
     ln -s /usr/lib/hadoop-${HADOOP_VERSION} /usr/lib/hadoop && \
-    chown -R hadoop:hadoop /usr/lib/hadoop /usr/lib/hadoop-${HADOOP_VERSION}
+    chown -R hadoop:hadoop /usr/lib/hadoop /usr/lib/hadoop-${HADOOP_VERSION} && \
+    rm -rf /usr/lib/hadoop/share/doc
 
 ENV HADOOP_HOME /usr/lib/hadoop
 ENV PATH ${HADOOP_HOME}/bin:${HADOOP_HOME}/sbin:${PATH}
