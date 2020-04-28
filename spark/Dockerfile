@@ -14,7 +14,7 @@ RUN wget -q https://github.com/apache/spark/archive/v${SPARK_VERSION}.tar.gz -O 
     ./dev/make-distribution.sh --name spark -Phive -Phive-thriftserver -Pyarn -Dhadoop.version=${HADOOP_VERSION} && \
     mv ~/spark-${SPARK_VERSION}/dist ~/spark-${SPARK_VERSION}-bin-spark && \
     cd ~ && rm -rf spark.tar.gz spark-${SPARK_VERSION} .m2 && \
-    mv /home/hadoop/spark-${SPARK_VERSION}-bin-spark /usr/lib && \
+    mv /root/spark-${SPARK_VERSION}-bin-spark /usr/lib && \
     ln -s /usr/lib/spark-${SPARK_VERSION}-bin-spark /usr/lib/spark && \
     chmod 775 -R /usr/lib/spark-${SPARK_VERSION}-bin-spark /usr/lib/spark
 
