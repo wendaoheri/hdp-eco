@@ -48,4 +48,6 @@ COPY entrypoint.sh /
 
 RUN chown spark:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
 
+EXPOSE 8998
+
 ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]
