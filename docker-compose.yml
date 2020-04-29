@@ -61,6 +61,18 @@ services:
       - hadoop
     ports: 
       - 8998:8998
+  
+  flink:
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/flink
+    hostname: flink
+    container_name: flink
+    volumes:
+      - ./hive/conf/:/usr/lib/hive/conf/
+      - ./hadoop/config/:/usr/lib/hadoop/etc/hadoop/
+      - ./flink/conf/:/usr/lib/flink/conf/
+      - ./flink/bin/:/usr/lib/flink/bin/
+    ports:
+      - 8080:8080
 
   kafka:
     image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/kafka

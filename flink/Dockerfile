@@ -14,9 +14,18 @@ RUN wget -q https://archive.apache.org/dist/flink/flink-${FLINK_VERSION}/flink-$
 ENV FLINK_HOME /usr/lib/flink
 ENV PATH ${FLINK_HOME}/bin:${PATH}
 
+COPY supervisor.d/* /etc/supervisor.d/
 RUN rm -rf /etc/supervisor.d/hadoop.conf
 RUN rm -rf /etc/supervisor.d/hive.conf
 
 RUN mkdir -p /var/log/flink && \
     chown -R flink:hadoop /var/log/flink && \
     chmod 775 -R /var/log/flink
+
+COPY conf/* ${FLINK_HOME}/conf/
+COPY bin/* ${FLINK_HOME}/bin/
+
+RUN chown -R hadoop:hadoop ${FLINK_HOME}/conf/ ${FLINK_HOME}/bin/ && \
+    chmod 775 -R ${FLINK_HOME}/conf/ ${FLINK_HOME}/bin/
+
+EXPOSE 8080
