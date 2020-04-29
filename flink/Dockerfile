@@ -21,6 +21,8 @@ RUN rm -rf /etc/supervisor.d/hive.conf
 RUN mkdir -p /var/log/flink && \
     chown -R flink:hadoop /var/log/flink && \
     chmod 775 -R /var/log/flink
+    
+ENV FLINK_LOG_DIR /var/log/flink
 
 COPY conf/* ${FLINK_HOME}/conf/
 COPY bin/* ${FLINK_HOME}/bin/
