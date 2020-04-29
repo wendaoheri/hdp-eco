@@ -8,8 +8,8 @@ RUN useradd -d /home/flink -m -g hadoop flink
 RUN wget -q https://archive.apache.org/dist/flink/flink-${FLINK_VERSION}/flink-${FLINK_VERSION}-bin-scala_${SCALA_VERSION}.tgz && \
     tar -xf flink-${FLINK_VERSION}-bin-scala_${SCALA_VERSION}.tgz -C /usr/lib && \
     rm -rf flink-${FLINK_VERSION}-bin-scala_${SCALA_VERSION}.tgz && \
-    ln -s /usr/lib/flink-${FLINK_VERSION}-bin-scala_${SCALA_VERSION} /usr/lib/flink && \
-    chown -R hadoop:hadoop /usr/lib/flink-${FLINK_VERSION}-bin-scala_${SCALA_VERSION} /usr/lib/flink
+    ln -s /usr/lib/flink-${FLINK_VERSION} /usr/lib/flink && \
+    chown -R hadoop:hadoop /usr/lib/flink-${FLINK_VERSION} /usr/lib/flink
 
 ENV FLINK_HOME /usr/lib/flink
 ENV PATH ${FLINK_HOME}/bin:${PATH}
