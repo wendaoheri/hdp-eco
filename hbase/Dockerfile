@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hive
+FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/spark
 
 ENV HBASE_VERSION 1.6.0
 
@@ -20,7 +20,7 @@ COPY conf/* ${HBASE_HOME}/conf/
 COPY bin/* ${HBASE_HOME}/bin/
 
 COPY supervisor.d/* /etc/supervisor.d/
-RUN rm -rf /etc/supervisor.d/hive.conf
+RUN rm -rf /etc/supervisor.d/spark.conf
 
 RUN chown -R hbase:hadoop ${HBASE_HOME}/conf/ ${HBASE_HOME}/bin/  && \
     chmod 775 -R ${HBASE_HOME}/conf/ ${HBASE_HOME}/bin/
