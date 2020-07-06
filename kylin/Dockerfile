@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/spark
+FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/hbase
 
 ENV KYLIN_VERSION 2.6.6
 
@@ -19,3 +19,19 @@ ENV PATH ${KYLIN_HOME}/bin:${PATH}
 COPY conf/* ${KYLIN_HOME}/conf/
 COPY bin/* ${KYLIN_HOME}/bin/
 COPY sample_cube/* ${KYLIN_HOME}/sample_cube
+
+COPY supervisor.d/* /etc/supervisor.d/
+RUN rm -rf /etc/supervisor.d/hbase.conf
+
+RUN chown -R kylin:hadoop ${KYLIN_HOME}/conf/ ${KYLIN_HOME}/bin/  && \
+    chmod 775 -R ${KYLIN_HOME}/conf/ ${KYLIN_HOME}/bin/
+
+RUN mkdir -p /var/log/kylin && \
+    chown -R kylin:hadoop /var/log/kylin && \
+    chmod 775 -R /var/log/kylin
+
+COPY entrypoint.sh /
+
+RUN chown kylin:hadoop /entrypoint.sh && chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "sh", "-c", "/entrypoint.sh" ]

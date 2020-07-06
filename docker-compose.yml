@@ -80,8 +80,34 @@ services:
     hostname: kafka
     ports:
       - 9092:9092
-      - 2181:2181
   
+  hbase:
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/hbase
+    container_name: hbase
+    hostname: hbase
+    volumes:
+      - ./hive/conf/:/usr/lib/hive/conf/
+      - ./hadoop/config/:/usr/lib/hadoop/etc/hadoop/
+      - ./hbase/conf/:/usr/lib/hbase/conf/
+    depends_on: 
+      - hadoop
+    # ports:
+    #   - 9092:9092
+    #   - 2181:2181
+  kylin:
+    image: registry.cn-hangzhou.aliyuncs.com/hdp-eco/kylin
+    container_name: kylin
+    hostname: kylin
+    volumes:
+      - ./hive/conf/:/usr/lib/hive/conf/
+      - ./hadoop/config/:/usr/lib/hadoop/etc/hadoop/
+      - ./kylin/conf/:/usr/lib/kylin/conf/
+    depends_on: 
+      - hbase
+    # ports:
+    #   - 9092:9092
+    #   - 2181:2181
+
   mysql:
     container_name: mysql
     image: mysql:8.0.11
@@ -97,6 +123,14 @@ services:
     ports:
       - 3306:3306
     hostname: mysql
+
+  zookeeper:
+    container_name: zookeeper
+    image: zookeeper:3.5.7
+    restart: always
+    ports:
+      - 2181:2181
+    hostname: zookeeper
   
   adminer:
     image: adminer
