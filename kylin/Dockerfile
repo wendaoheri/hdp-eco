@@ -18,7 +18,6 @@ ENV PATH ${KYLIN_HOME}/bin:${PATH}
 
 COPY conf/* ${KYLIN_HOME}/conf/
 COPY bin/* ${KYLIN_HOME}/bin/
-COPY sample_cube/* ${KYLIN_HOME}/sample_cube
 
 COPY supervisor.d/* /etc/supervisor.d/
 RUN rm -rf /etc/supervisor.d/hbase.conf
