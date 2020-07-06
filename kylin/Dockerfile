@@ -1,6 +1,6 @@
 FROM registry.cn-hangzhou.aliyuncs.com/hdp-eco/spark
 
-EVN KYLIN_VERSION 2.6.6
+ENV KYLIN_VERSION 2.6.6
 
 RUN useradd -d /home/kylin -m -g hadoop kylin
 
